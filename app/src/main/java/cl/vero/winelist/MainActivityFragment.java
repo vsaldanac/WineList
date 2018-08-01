@@ -10,13 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import cl.vero.winelist.adapters.WineClickListener;
 import cl.vero.winelist.adapters.WinesAdapter;
 import cl.vero.winelist.models.Wine;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class MainActivityFragment extends Fragment implements WineClickListener{
+
+    private WinesAdapter adapter;
 
     public MainActivityFragment() {
     }
@@ -54,8 +57,18 @@ public class MainActivityFragment extends Fragment {
         wine7.save();
         wine8.save();
 
-        WinesAdapter adapter = new WinesAdapter();
+        adapter = new WinesAdapter(this);
         recyclerView.setAdapter(adapter);
+
+    }
+
+    public void updateList(Wine wine){
+        adapter.update(wine);
+
+    }
+
+    @Override
+    public void clickedId(long id) {
 
     }
 }

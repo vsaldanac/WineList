@@ -16,6 +16,11 @@ import cl.vero.winelist.models.Wine;
 public class WinesAdapter extends RecyclerView.Adapter<WinesAdapter.ViewHolder>{
 
     List<Wine> wines = new Queries().wines();
+    private WineClickListener listener;
+
+    public WinesAdapter(WineClickListener listener) {
+        this.listener = listener;
+    }
 
     @NonNull
     @Override
@@ -58,6 +63,11 @@ public class WinesAdapter extends RecyclerView.Adapter<WinesAdapter.ViewHolder>{
     @Override
     public int getItemCount() {
         return wines.size();
+    }
+
+    public void update(Wine wine){
+        wines.add(wine);
+        notifyDataSetChanged();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
